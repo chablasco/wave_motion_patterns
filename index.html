@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>CB Wave Motion Patterns</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/p5.js"></script>
+  <style>
+    body {
+      margin: 0;           /* Remove default margin */
+      overflow: hidden;    /* Prevent scrollbars */
+    }
+    canvas {
+      display: block;      /* Remove extra spacing below canvas */
+    }
+  </style>
+</head>
+<body>
+  <script>
+    function setup() {
+      createCanvas(windowWidth, windowHeight);
+      background(0);
+    }
+
+    function draw() {
+      translate(width / 2, height / 2);
+      let mag = 100;
+      let s = 700;
+      noStroke();
+
+      // First wave loop
+      for (let i = 0; i < 100; i++) {
+        let w = map(sin(radians(frameCount)), -1, 1, -100, 100);
+        let wave1 = map(cos(radians(frameCount * 0.8 + i + w)), -1, 1, -mag, mag);
+        let wave2 = map(tan(radians(frameCount + i)), -1, 1, -mag, mag);
+        let c = map(sin(radians(frameCount * 5 + i)), -1, 1, 0, 255);
+        fill(c);
+        ellipse(wave1, wave2, s, s);
+      }
+
+      // Second wave loop
+      for (let i = 0; i < 100; i++) {
+        let w = map(sin(radians(frameCount)), -1, 1, -100, 100);
+        let wave1 = map(tan(radians(frameCount * 0.8 + i + w)), -1, 1, -mag, mag);
+        let wave2 = map(sin(radians(frameCount + i)), -1, 1, -mag, mag);
+        let c = map(sin(radians(frameCount * 5 + i)), -1, 1, 0, 255);
+        fill(c);
+        ellipse(wave1, wave2, s, s);
+      }
+    }
+
+    function windowResized() {
+      resizeCanvas(windowWidth, windowHeight);
+    }
+  </script>
+</body>
+</html>
